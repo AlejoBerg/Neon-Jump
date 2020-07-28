@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float speed = 0; //Velocidad de izquierda a derecha 
     [SerializeField] private float jumpForwardMovementSpeed = 2; //Cuanto se va a mover para adelante cuando salta
     [SerializeField] private float jumpForce = 5; // Cuan alto va a saltar
 
@@ -24,10 +23,14 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerMovement()
     {
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
-        Vector3 playerMovement = new Vector3(horizontal, 0, 0).normalized ;
-        transform.Translate(playerMovement * speed * Time.deltaTime);
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            if(touch.phase == TouchPhase.Moved)
+            {
+                transform.position = new Vector3(transform.position.x + touch.deltaPosition.x * Time.deltaTime, transform.position.y , transform.position.z);
+            }
+        }
     }
 
     private void PlayerJump()
