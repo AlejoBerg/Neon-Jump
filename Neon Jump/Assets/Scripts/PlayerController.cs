@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float speed = 0;
-    [SerializeField] private float jumpForwardMovementSpeed = 2; 
+    [SerializeField] private float speed = 0; //Velocidad de izquierda a derecha 
+    [SerializeField] private float jumpForwardMovementSpeed = 2; //Cuanto se va a mover para adelante cuando salta
+    [SerializeField] private float jumpForce = 5; // Cuan alto va a saltar
+
     private Rigidbody myRigidbody = null;
-    private float jumpForce = 5;
     private bool isGrounded = true;
 
     private void Start()
