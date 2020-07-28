@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         PlayerMovement();
+        PlayerMovementKeyboard();//Solo para test
         PlayerJump();
     }
 
@@ -41,6 +42,15 @@ public class PlayerController : MonoBehaviour
             myRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             myRigidbody.AddForce(Vector3.forward * jumpForwardMovementSpeed, ForceMode.Impulse);
         }
+    }
+
+    private void PlayerMovementKeyboard()
+    {
+        var speed = 5;
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
+        Vector3 playerMovement = new Vector3(horizontal, 0, 0).normalized;
+        transform.Translate(playerMovement * speed * Time.deltaTime);
     }
 
     private void OnCollisionEnter(Collision other)
