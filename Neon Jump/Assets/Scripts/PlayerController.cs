@@ -10,8 +10,6 @@ public class PlayerController : MonoBehaviour
     private Rigidbody myRigidbody = null;
     private bool isGrounded = true;
 
-    public SpawnManager spawnManager;
-
     private void Start()
     {
         myRigidbody = GetComponent<Rigidbody>();
@@ -52,10 +50,4 @@ public class PlayerController : MonoBehaviour
             isGrounded = true;
         }
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        spawnManager.SpawnTriggerEntered();
-    }
-
 }
