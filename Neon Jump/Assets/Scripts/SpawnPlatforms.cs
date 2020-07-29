@@ -8,16 +8,27 @@ public class SpawnPlatforms : MonoBehaviour
 {
 
     public List<GameObject> platform;
-    private float offset = 5f;
+    //public GameObject[] platforms = new GameObject[4];    Array
+    
+
+    private float offset = 2f;
 
 
 
-    // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
-        if(platform != null && platform.Count > 0)
+       
+    }
+
+    void Start()
+    {   
+
+        //Aca marcariamos cada espacio del Array
+        
+        if (platform != null && platform.Count > 0)
         {
-            platform = platform.OrderBy(p => p.transform.position.z).ToList(); 
+            platform = platform.OrderBy(r => r.transform.position.z).ToList();
         }
     }
 
@@ -31,9 +42,11 @@ public class SpawnPlatforms : MonoBehaviour
     public void MovePlatform()
     {
         GameObject movePlatform = platform[0];
+        float posY = transform.position.y + 1f;
         platform.Remove(movePlatform);
-        float newZ = platform[platform.Count - 1].transform.position.z + offset;
-        movePlatform.transform.position = new Vector3(0, 0, newZ);
+        float posZ = platform[platform.Count - 1].transform.position.z + offset;
+        movePlatform.transform.position = new Vector3(Random.Range(-1f,3f), posY + 1, posZ);
+
         platform.Add(movePlatform);
 
     }

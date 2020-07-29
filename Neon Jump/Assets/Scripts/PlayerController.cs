@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody myRigidbody = null;
     private bool isGrounded = true;
 
-    public SpawnManager spawnManager;
+   // public SpawnManager spawnManager;
 
     private void Start()
     {
@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
         PlayerMovement();
         PlayerMovementKeyboard();//Solo para test
         PlayerJump();
+        
     }
 
     private void PlayerMovement()
@@ -57,15 +58,16 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if(other.gameObject.layer == 8)
+
+        //spawnManager.SpawnTriggerEntered();
+         if (other.gameObject.layer == 8)
         {
             isGrounded = true;
         }
+
+
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        spawnManager.SpawnTriggerEntered();
-    }
+   
 
 }

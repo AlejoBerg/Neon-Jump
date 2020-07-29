@@ -23,4 +23,7 @@ public class SpawnManager : MonoBehaviour
     {
         spawnPlatforms.MovePlatform();
     }
+
+   
+
 }
