@@ -14,8 +14,6 @@ public class PlayerController : MonoBehaviour
     private Rigidbody myRigidbody = null;
     private bool isGrounded = true;
 
-   // public SpawnManager spawnManager;
-
     private void Start()
     {
         platformsQueue = new Queue<GameObject>();
@@ -50,7 +48,7 @@ public class PlayerController : MonoBehaviour
             Touch touch = Input.GetTouch(0);
             if(touch.phase == TouchPhase.Moved)
             {
-                transform.position = new Vector3(transform.position.x + touch.deltaPosition.x * Time.deltaTime, transform.position.y , transform.position.z);
+                transform.position = new Vector3(transform.position.x + touch.deltaPosition.x * Time.deltaTime, transform.position.y , transform.position.z);//.normalized
             }
         }
     }
@@ -61,7 +59,7 @@ public class PlayerController : MonoBehaviour
         {
             isGrounded = false;
             nextPlatform = platformsQueue.Peek();
-            var diff = Mathf.Abs(Mathf.Abs(this.transform.position.z) - Mathf.Abs(nextPlatform.transform.localPosition.z));
+            //var diff = Mathf.Abs(Mathf.Abs(this.transform.position.z) - Mathf.Abs(nextPlatform.transform.localPosition.z));
 
             myRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             //myRigidbody.velocity *= 0f;
@@ -71,7 +69,7 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerMovementKeyboard()
     {
-        var speed = 5;
+        var speed = 8;
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         Vector3 playerMovement = new Vector3(horizontal, 0, 0).normalized;
@@ -80,16 +78,9 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-
-        //spawnManager.SpawnTriggerEntered();
-         if (other.gameObject.layer == 8)
+        if (other.gameObject.layer == 8)
         {
             isGrounded = true;
         }
-
-
     }
-
-   
-
 }
