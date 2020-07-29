@@ -25,7 +25,6 @@ public class PlayerController : MonoBehaviour
         }
 
         nextPlatform = platformsQueue.Peek();
-
     }
 
     private void Update()
@@ -39,9 +38,6 @@ public class PlayerController : MonoBehaviour
             Vector3 currentVelocity = new Vector3(0,0,5);
             Vector3 dampedPosition = Vector3.SmoothDamp(transform.position, nextPlatform.transform.position, ref currentVelocity, 0.3f);
             transform.position = dampedPosition;
-            //float smoothTime = 5;
-            //var dampedPos = Mathf.SmoothDamp(transform.position.z, nextPlatform.transform.position.z, ref smoothTime, 2f);
-            //transform.position = new Vector3(transform.position.x, transform.position.y, dampedPos);
         }
     }
 
@@ -66,7 +62,6 @@ public class PlayerController : MonoBehaviour
             var diff = Mathf.Abs(Mathf.Abs(this.transform.position.z) - Mathf.Abs(nextPlatform.transform.localPosition.z));
 
             myRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-
             //myRigidbody.velocity *= 0f;
             platformsQueue.Dequeue();
         }
