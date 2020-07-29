@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody myRigidbody = null;
     private bool isGrounded = true;
 
+   // public SpawnManager spawnManager;
+
     private void Start()
     {
         platformsQueue = new Queue<GameObject>();
@@ -78,9 +80,16 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if(other.gameObject.layer == 8)
+
+        //spawnManager.SpawnTriggerEntered();
+         if (other.gameObject.layer == 8)
         {
             isGrounded = true;
         }
+
+
     }
+
+   
+
 }
