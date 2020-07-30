@@ -15,11 +15,8 @@ public class ObjectPooler : MonoBehaviour
     }
 
     public static ObjectPooler Instance;
-
-
     public List<Pool> pools;
-    public Dictionary<string, Queue<GameObject>> poolDictionary;
-    
+    public Dictionary<string, Queue<GameObject>> poolDictionary;    
     private Vector3 objectPoolPosition = new Vector3(0, 0, 0);
 
     private void Awake()
@@ -30,7 +27,6 @@ public class ObjectPooler : MonoBehaviour
     void Start()
     {
         poolDictionary = new Dictionary<string, Queue<GameObject>>();
-
         foreach (Pool pool in pools)
         {
             Queue<GameObject> objectPool = new Queue<GameObject>();
@@ -43,7 +39,7 @@ public class ObjectPooler : MonoBehaviour
                 objectPool.Enqueue(obj);
                 var reference = objectPool.Peek();
                 reference.transform.position = objectPoolPosition;
-                objectPoolPosition += new Vector3(0, 0, 2);                
+                objectPoolPosition += new Vector3(Random.Range(-4, +4), 0, 0);                
             }
             poolDictionary.Add(pool.tag, objectPool);
         }
@@ -55,23 +51,19 @@ public class ObjectPooler : MonoBehaviour
             Debug.Log(tag + "No existe");
             return null;
         }
-
-        GameObject objectToSpawn = poolDictionary[tag].Dequeue();
+        GameObject objectToSpawn = poolDictionary[tag].Dequeue();        
         
         objectToSpawn.SetActive(true);
         objectToSpawn.transform.position = objectPoolPosition;
-        objectPoolPosition += new Vector3(0, 0, 2);
+        objectPoolPosition += new Vector3(Random.Range(2,-2), 2, 4);
         objectToSpawn.transform.rotation = rotation;
-
+        
         IPooledObject pooledObj = objectToSpawn.GetComponent<IPooledObject>();
         if (pooledObj != null)
         {
             pooledObj.OnObjectSpawn();
         }
-
-
         poolDictionary[tag].Enqueue(objectToSpawn);
-
         return objectToSpawn;
     }
 }

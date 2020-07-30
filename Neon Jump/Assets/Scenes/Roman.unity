@@ -438,7 +438,7 @@ MonoBehaviour:
   pools:
   - tag: Platform
     prefab: {fileID: 9207950240892539741, guid: 56780e50554e98f4b8cf18ec974d746d, type: 3}
-    size: 10
+    size: 20
 --- !u!4 &547194326
 Transform:
   m_ObjectHideFlags: 0
@@ -902,7 +902,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1870085098}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.79, z: 1.77}
+  m_LocalPosition: {x: -1.64, y: 1.79, z: 1.77}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 711428436}
