@@ -15,7 +15,7 @@ public class PlatformPool : MonoBehaviour
     private float timeSinceLastSpawned;
     private int currentPlatform = 0;
 
-   
+
     void Start()
     {
         platforms = new GameObject[platformPoolSize];
@@ -24,11 +24,9 @@ public class PlatformPool : MonoBehaviour
             platforms[i] = (GameObject)Instantiate(platformPrefab, objectPoolPosition, Quaternion.identity);
             objectPoolPosition += new Vector3(0, 0, 2);
         }
-
-
     }
 
-    
+
     void Update()
     {
         timeSinceLastSpawned += Time.deltaTime;
@@ -36,12 +34,12 @@ public class PlatformPool : MonoBehaviour
         {
             timeSinceLastSpawned = 0;
             float spawnZPosition = platforms[currentPlatform].transform.position.z + 2;
-            platforms [currentPlatform].transform.position = new Vector3(0, 0, spawnZPosition);
+            platforms[currentPlatform].transform.position = new Vector3(0, 0, spawnZPosition);
             currentPlatform++;
             if (currentPlatform >= platformPoolSize)
             {
                 currentPlatform = 0;
             }
         }
-}
+    }
 }
