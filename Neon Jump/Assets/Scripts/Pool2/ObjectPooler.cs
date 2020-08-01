@@ -4,21 +4,18 @@ using UnityEngine;
 
 public class ObjectPooler : MonoBehaviour
 {
-
     [System.Serializable]
     public class Pool
     {
         public string tag;
         public GameObject prefab;
-        public int size;       
-        
-    }
+        public int size;               
+    }    
 
     public static ObjectPooler Instance;
     public List<Pool> pools;
-    public Dictionary<string, Queue<GameObject>> poolDictionary;    
+    private Dictionary<string, Queue<GameObject>> poolDictionary;
     private Vector3 objectPoolPosition = new Vector3(0, 0, 0);
-
     private void Awake()
     {
         Instance = this;
@@ -39,7 +36,7 @@ public class ObjectPooler : MonoBehaviour
                 objectPool.Enqueue(obj);
                 var reference = objectPool.Peek();
                 reference.transform.position = objectPoolPosition;
-                objectPoolPosition += new Vector3(Random.Range(-4, +4), 0, 0);                
+                objectPoolPosition += new Vector3(0, 0, 0);                
             }
             poolDictionary.Add(pool.tag, objectPool);
         }
@@ -52,12 +49,12 @@ public class ObjectPooler : MonoBehaviour
             return null;
         }
         GameObject objectToSpawn = poolDictionary[tag].Dequeue();        
-        
+        //Sale de la cola
         objectToSpawn.SetActive(true);
         objectToSpawn.transform.position = objectPoolPosition;
         objectPoolPosition += new Vector3(Random.Range(2,-2), 2, 4);
         objectToSpawn.transform.rotation = rotation;
-        
+        //Lo Activo, le doy una nueva posicion y rotacion
         IPooledObject pooledObj = objectToSpawn.GetComponent<IPooledObject>();
         if (pooledObj != null)
         {
