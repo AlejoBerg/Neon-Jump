@@ -4,27 +4,16 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public GameObject [] platformsReference;
-    private Queue<GameObject> platformsQueue;
-    private GameObject nextPlatform;
-
-    [SerializeField] private float jumpForwardMovementSpeed = 2; //Cuanto se va a mover para adelante cuando salta
     [SerializeField] private float jumpForce = 4; // Cuan alto va a saltar
+    [SerializeField] private ObjectPooler objectPoolerRef;
 
+    private GameObject nextPlatform;
     private Rigidbody myRigidbody = null;
     private bool isGrounded = true;
 
     private void Start()
     {
-        platformsQueue = new Queue<GameObject>();
         myRigidbody = GetComponent<Rigidbody>();
-        
-        foreach (var platform in platformsReference)
-        {
-            platformsQueue.Enqueue(platform);
-        }
-
-        nextPlatform = platformsQueue.Peek();
     }
 
     private void Update()
@@ -32,6 +21,8 @@ public class PlayerController : MonoBehaviour
         PlayerJump();
         PlayerMovement();
         PlayerMovementKeyboard();//Solo para test
+
+        nextPlatform = objectPoolerRef.objectPool.Peek();
 
         if (transform.position.z < nextPlatform.transform.position.z)
         {
@@ -58,12 +49,12 @@ public class PlayerController : MonoBehaviour
         if (isGrounded == true)
         {
             isGrounded = false;
-            nextPlatform = platformsQueue.Peek();
+            //nextPlatform = platformsQueue.Peek();
             //var diff = Mathf.Abs(Mathf.Abs(this.transform.position.z) - Mathf.Abs(nextPlatform.transform.localPosition.z));
 
             myRigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             //myRigidbody.velocity *= 0f;
-            platformsQueue.Dequeue();
+            //platformsQueue.Dequeue();
         }
     }
 
@@ -80,6 +71,8 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.layer == 8)
         {
+            var temp = objectPoolerRef.objectPool.Peek();
+            objectPoolerRef.objectPool.Dequeue();
             isGrounded = true;
         }
     }
