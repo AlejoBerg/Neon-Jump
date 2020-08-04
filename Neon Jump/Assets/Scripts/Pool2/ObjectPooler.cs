@@ -13,7 +13,7 @@ public class ObjectPooler : MonoBehaviour
     }    
 
     public static ObjectPooler Instance;
-    //public PlayerController playerRef;
+    public PlayerController playerRef;
     public List<Pool> pools;
     private Dictionary<string, Queue<GameObject>> poolDictionary;
     private Vector3 objectPoolPosition = new Vector3(0, 0, 0);
@@ -21,6 +21,7 @@ public class ObjectPooler : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        //playerRef.OnCollisionWithPlatform += OnCollisionWithPlatformHandler;
     }
 
     void Start()
@@ -67,4 +68,9 @@ public class ObjectPooler : MonoBehaviour
         //playerRef.nextPlatform = objectPool.Peek();
         return objectToSpawn;
     }
+
+    //private void OnCollisionWithPlatformHandler()
+    //{//Desencolar la plataforma hubicada en el indice 0 del queue
+    //    objectPool.Dequeue();
+    //}
 }

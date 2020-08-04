@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce = 4; // Cuan alto va a saltar
     [SerializeField] private ObjectPooler objectPoolerRef;
 
+    //public event Action OnCollisionWithPlatform;
     private GameObject nextPlatform;
     private Rigidbody myRigidbody = null;
     private bool isGrounded = true;
@@ -71,8 +73,8 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject.layer == 8)
         {
-            var temp = objectPoolerRef.objectPool.Peek();
-            objectPoolerRef.objectPool.Dequeue();
+            //OnCollisionWithPlatform?.Invoke();
+            print("colisione con platform");
             isGrounded = true;
         }
     }

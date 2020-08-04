@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlatformSpawner : MonoBehaviour
 {
     ObjectPooler  objectPooler;
-    private float Life = 0.2f;
+    private float Life = 1f;
     private int temp = 0;
     private void Start()
     {
