@@ -10,11 +10,11 @@ public class BackgroundManager : MonoBehaviour
 
     void Start()
     {
-        initialColor = new Color(0, 0, 0);
-        endColor = new Color(0, 0, 0);
-        RenderSettings.skybox.SetFloat("_Exposure", 6);
-        RenderSettings.skybox.SetColor("_Tint", Color.white);
-        print($"el color actual del cielo es {RenderSettings.skybox}");
+        //initialColor = new Color(0, 0, 0);
+        //endColor = new Color(0, 0, 0);
+        //RenderSettings.skybox.SetFloat("_Exposure", 6);
+        //RenderSettings.skybox.SetColor("_Tint", Color.white);
+        //print($"el color actual del cielo es {RenderSettings.skybox}");
     }
 
     void Update()
