@@ -13,12 +13,13 @@ public class PlayerController : MonoBehaviour
     private int currentPlatformIndex = 0;
 
     [SerializeField] private float jumpForce = 4; // Cuan alto va a saltar
+    [SerializeField] private float forwardSpeed = 5;
     [SerializeField] private GameObject[] platformsReference;
 
     private void Start()
     {
         myRigidbody = GetComponent<Rigidbody>();
-        nextPlatform = platformsReference[1];
+        nextPlatform = platformsReference[0];
     }
 
     private void Update()
@@ -29,8 +30,7 @@ public class PlayerController : MonoBehaviour
 
         if (transform.position.z < nextPlatform.transform.position.z)
         {
-            print("nextPlatform.transform.position.z = " + nextPlatform.transform.position.z);
-            Vector3 currentVelocity = new Vector3(0,0,5);
+            Vector3 currentVelocity = new Vector3(0,0, forwardSpeed);
             Vector3 dampedPosition = Vector3.SmoothDamp(transform.position, nextPlatform.transform.position, ref currentVelocity, 0.3f);
             transform.position = dampedPosition;
         }
@@ -71,7 +71,6 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.layer == 8)
         {
             OnCollisionWithPlatform?.Invoke();
-
             if(currentPlatformIndex < platformsReference.Length - 1)
             {
                 currentPlatformIndex += 1;

@@ -20,14 +20,14 @@ public class PlatformsSpawner : MonoBehaviour
     {
         if (usedPlatform < platformsReference.Length)
         {
-            platformsReference[usedPlatform].transform.position = platformsReference[lastRecycledObject].transform.position + new Vector3(0, 0, 4);
+            platformsReference[usedPlatform].transform.position = platformsReference[lastRecycledObject].transform.position + new Vector3(Random.Range(-4f, 4f), Random.Range(1, 2), Random.Range(3, 5));
             lastRecycledObject = usedPlatform;
             usedPlatform += 1;
         }
         else
         {
             usedPlatform = 0;
-            platformsReference[usedPlatform].transform.position = platformsReference[lastRecycledObject].transform.position + new Vector3(0, 0, 4);
+            platformsReference[usedPlatform].transform.position = platformsReference[lastRecycledObject].transform.position + new Vector3(Random.Range(-4f, 4f), Random.Range(1, 2), Random.Range(3, 5));
             lastRecycledObject = usedPlatform;
             usedPlatform += 1;
         }

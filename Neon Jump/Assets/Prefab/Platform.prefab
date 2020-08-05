@@ -175,7 +175,7 @@ GameObject:
   - component: {fileID: 595342662715437135}
   - component: {fileID: 2621855495317908329}
   m_Layer: 8
-  m_Name: Platform2
+  m_Name: Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -208,8 +208,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.6374866, y: 0.2057991, z: 0.5047684}
-  m_Center: {x: -0.0041106343, y: 0.10016012, z: -0.012308121}
+  m_Size: {x: 1.8118308, y: 0.2057991, z: 0.5047684}
+  m_Center: {x: -0.05007291, y: 0.10016012, z: -0.012308121}
 --- !u!114 &595342662715437135
 MonoBehaviour:
   m_ObjectHideFlags: 0
