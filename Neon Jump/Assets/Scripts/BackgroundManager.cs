@@ -4,50 +4,41 @@ using UnityEngine;
 
 public class BackgroundManager : MonoBehaviour
 {
-    [SerializeField] private Material sky;
-    private Color initialColor;
-    private float redChannelLerp = 0.1f;
-    private float greenChannelLerp = 0.1f;
-    private float blueChannelLerp = 0.1f;
-    private float targetColor = 0;
-    private float currentColor = 0;
+    private Color startColor = Color.magenta;
+    private Color endColor = Color.yellow;
+    private float standardDuration = 20f;
 
-    void Start()
+    private bool isExecutingSpecialBGColor = false;
+    private float specialLerp = 0;
+
+    private void Update()
     {
-        initialColor = RenderSettings.skybox.color = Color.black;
-        print($"entro en el start con {initialColor}");
-        //RenderSettings.skybox.SetFloat("_Exposure", 6);
-        //RenderSettings.skybox.SetColor("_Tint", Color.white);
+        ExecuteSpecialBGColor(Color.green, 5f);
+        ExecuteStandardBGColor();
     }
 
-    void Update()
+    private void ExecuteSpecialBGColor(Color _newColor, float _delay) //Cambio de color "especial" = Se usa cuando ocurre algo. Ej: Agarro powerUp
     {
-        redChannelLerp = ChangeChannelColor(redChannelLerp, 0.0001f);
-        greenChannelLerp = ChangeChannelColor(greenChannelLerp, 0.0005f); 
-        blueChannelLerp = ChangeChannelColor(blueChannelLerp, 0.0002f);
+        if(specialLerp <= 1f)
+        {
+            isExecutingSpecialBGColor = true;
+            endColor = _newColor;
 
-        RenderSettings.skybox.SetColor("_Tint", new Color(redChannelLerp, greenChannelLerp, blueChannelLerp));
-        print($"el color es = R:{redChannelLerp * 255}, G:{greenChannelLerp * 255}, B:{blueChannelLerp * 255}");
+            specialLerp = Mathf.PingPong(Time.time, _delay) / _delay;
+            RenderSettings.skybox.SetColor("_Tint", Color.Lerp(startColor, endColor, specialLerp));
+        }
+        else
+        {
+            isExecutingSpecialBGColor = false;
+        }
     }
 
-    private float ChangeChannelColor(float _color, float _delay)
+    private void ExecuteStandardBGColor() //Cambio de color "standard" = Se ejecuta constantemente a menos que se ejecute el cambio de color "especial"
     {
-        if(_color <= targetColor)
+        if(isExecutingSpecialBGColor == false) 
         {
-            targetColor = 1;
-            _color += _delay;
-            return _color;
+            float lerp = Mathf.PingPong(Time.time, standardDuration) / standardDuration;
+            RenderSettings.skybox.SetColor("_Tint", Color.Lerp(startColor, endColor, lerp));
         }
-        if(_color >= targetColor)
-        {
-            targetColor = 0;
-        }
-        if(_color > targetColor)
-        {
-            _color -= _delay;
-            return _color;
-        }
-
-        return _color;
     }
 }
